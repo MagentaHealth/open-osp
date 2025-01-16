@@ -1,7 +1,7 @@
-FROM openjdk:8
+FROM tomcat:9.0.97-jdk21-temurin
 
 # This container builds oscar, and runs mvn tests.
 # Install the mariadb-client so we can run tests.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends maven mariadb-client \
+    && apt-get install -y --no-install-recommends maven mariadb-client git \
     && apt-get clean
