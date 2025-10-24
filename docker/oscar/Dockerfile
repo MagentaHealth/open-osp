@@ -29,7 +29,7 @@ RUN apt-get update \
 
 # UBUNTU Jammy
 RUN apt-get update \
-    && apt-get -qq -y --no-install-recommends install ca-certificates fontconfig libc6 libfreetype6 libjpeg62 libpng16-16 libssl-dev libstdc++6 libx11-6 libxcb1 libxext6 libxrender1 libxi6 xfonts-75dpi xfonts-base zlib1g \
+    && apt-get -qq -y --no-install-recommends install ca-certificates fontconfig libc6 libfreetype6 libjpeg-turbo8 libpng16-16 libssl-dev libstdc++6 libx11-6 libxcb1 libxext6 libxrender1 libxi6 xfonts-75dpi xfonts-base zlib1g \
     && apt-get clean;
 
 # Other debian installs
