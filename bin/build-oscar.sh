@@ -21,7 +21,7 @@ if [[ "${TEST_DURING_BUILD:-}" ]]; then
 elif [[ "${DEVELOPMENT_MODE:-}" ]]; then
   mvn -T 1C install --offline
 else
-  mvn -Dcheckstyle.skip -Dmaven.test.skip=true clean package
+  mvn -e -Dcheckstyle.skip -Dmaven.test.skip=true clean package
 fi
 
 chmod 777 -R ./target/

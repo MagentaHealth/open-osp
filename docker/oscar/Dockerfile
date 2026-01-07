@@ -1,4 +1,11 @@
-FROM tomcat:9.0.86-jre8
+FROM tomcat:9.0.97-jdk21-temurin
+
+ENV CATALINA_HOME /usr/local/tomcat
+ENV PATH $CATALINA_HOME/bin:$PATH
+ENV CATALINA_OPTS="--add-opens java.base/java.net=ALL-UNNAMED"
+
+COPY --from=tomcat:9.0.97 /usr/local/tomcat $CATALINA_HOME
+
 
 # Set the locale
 RUN apt-get update && apt-get install -y locales curl iputils-ping
@@ -22,7 +29,7 @@ RUN apt-get update \
 
 # UBUNTU Jammy
 RUN apt-get update \
-    && apt-get -qq -y --no-install-recommends install ca-certificates fontconfig libc6 libfreetype6 libjpeg-turbo8 libpng16-16 libssl3 libstdc++6 libx11-6 libxcb1 libxext6 libxrender1 xfonts-75dpi xfonts-base zlib1g \
+    && apt-get -qq -y --no-install-recommends install ca-certificates fontconfig libc6 libfreetype6 libjpeg-turbo8 libpng16-16 libssl-dev libstdc++6 libx11-6 libxcb1 libxext6 libxrender1 libxi6 xfonts-75dpi xfonts-base zlib1g \
     && apt-get clean;
 
 # Other debian installs
