@@ -62,6 +62,14 @@ ADD ./bin/startup.sh /startup.sh
 # Integrator directory
 RUN mkdir -p /var/lib/bc-integrator/export
 
+# Create GPG wrapper script to handle modern GPG argument requirements
+# PGPEncrypt.java expects: bin cmd file recipient -> gpg -e file recipient
+# Modern GPG needs: gpg -e -r recipient file
+# Output file must use .pgp extension (not .gpg) to match Java code expectations
+RUN echo '#!/bin/bash' > /usr/local/bin/gpg-encrypt-wrapper \
+    && echo 'exec /usr/bin/gpg "$1" -r "$3" --batch --yes --trust-model always -o "$2.pgp" "$2"' >> /usr/local/bin/gpg-encrypt-wrapper \
+    && chmod +x /usr/local/bin/gpg-encrypt-wrapper
+
 ADD ./entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
