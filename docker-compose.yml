@@ -51,6 +51,25 @@ services:
             cpus: '2'
             memory: 15G
 
+    drugref:
+      image: openosp/drugref:latest
+      build: docker/drugref
+      ports:
+        - "8180:8080"
+      volumes:
+        - ./volumes/drugref2.properties:/root/drugref2.properties:ro
+      environment:
+        TZ: America/Toronto
+      networks:
+        - back-tier
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8080/drugref2/DrugrefService?wsdl"]
+        timeout: 10s
+        retries: 5
+        interval: 30s
+        start_period: 60s
+
+
     expedius:
       restart: 'always'
       image: openosp/expedius:latest

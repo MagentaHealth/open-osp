@@ -31,15 +31,15 @@ case $COMPONENT in
 
         # Download drugref if we need it
         # For some reason this is only when not testing during build and not in development mode
-        if [ -z $TEST_DURING_BUILD ] && [ -z $DEVELOPMENT_MODE ]; then
+        #if [ -z $TEST_DURING_BUILD ] && [ -z $DEVELOPMENT_MODE ]; then
             # echo "Retrieving current DrugRef2 binary"
             # export DRUGREF_WAR=${DRUGREF_WAR:-"https://bitbucket.org/openoscar/drugref/downloads/drugref2.war"}
             # docker run --rm -v $(pwd):/code/ alpine sh -c "apk add curl && cd /code/ && curl -Lo $OSCAR_OUTPUT/drugref2.war $DRUGREF_WAR"
 
-            echo "Compiling drugref warfile..."
-            docker compose -f docker-compose.build.yml run --rm builder ./bin/build-drugref.sh
-            mv $OSCAR_OUTPUT/drugref/target/drugref2.war $OSCAR_OUTPUT/drugref2.war
-        fi
+            #echo "Compiling drugref warfile..."
+            #docker compose -f docker-compose.build.yml run --rm builder ./bin/build-drugref.sh
+            #mv $OSCAR_OUTPUT/drugref/target/drugref2.war $OSCAR_OUTPUT/drugref2.war
+        #fi
 
         echo "Building Oscar Docker Image"
         docker compose  build oscar
